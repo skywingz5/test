@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://how2j.cn/study/axios.min.js"></script>
+</head>
+<body>
+
+<div id="hero">
+
+<script>
+axios.get('api/auth')
+  .then(function(response) {
+      let d = response.data
+      alert(d.result)
+  });
+
+</script>
+    </div>
+</body>
+</html>

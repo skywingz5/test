@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>admin</title>
+    {% include 'base.html' %}
+
+
+</head>
+<body>
+{% include 'header.html' %}
+
+
+<div class="container">
+
+
+    <table class="table table-hover">
+        <h1>ARTICLE</h1>
+        <thead>
+        <tr>
+            <th>Article id</th>
+            <th>Title</th>
+            <th>like</th>
+            <th>dislike</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for art in art %}
+            <tr>
+                <td>{{ art.id }}</td>
+                <td>{{ art.title }}</td>
+                <td>{{ art.like }}</td>
+                <td>{{ art.dislike }}</td>
+                <td><a href="/delete/article/{{ art.id }}">delete</a></td>
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+    <table class="table table-hover">
+        <h1>COMMENT</h1>
+        <thead>
+        <tr>
+            <th>Comment id</th>
+            <th>body</th>
+
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for comen in comen%}
+            <tr>
+                <td>{{ comen.id }}</td>
+                <td>{{ comen.body}}</td>
+                <td><a href="/delete/comment/{{ comen.id }}">delete</a></td>
+
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+
+</div>
+
+</body>
+</html>

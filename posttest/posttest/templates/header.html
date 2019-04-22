@@ -1,0 +1,56 @@
+<script>
+    $(document).ready(function () {
+
+
+
+        {% if mail != 'Hello, Stranger' %}
+            $(".oooo").text('logout')
+            $(".oooo").click(function () {
+                let data = {
+                    'name': 'kikay',
+                    'age': 18
+                }
+                $.ajax({
+                    type: 'GET',
+                    url: '{{url_for("test_get")}}',
+                    data: data,
+                    dataType: 'json',//希望服务器返回json格式的数据
+                    success: function (data) {
+                        {#
+                                                                                alert(JSON.stringify(data));
+                        #}
+
+                        {#                                                        window.location.href = "/";#}
+
+                        window.location.reload()
+                    }
+                });
+            });
+
+        {% endif %}
+
+
+
+    });
+
+
+</script>
+
+
+<!--HEADER-->
+<header class="blog-header py-3 container">
+    <div class="row flex-nowrap justify-content-between align-items-center">
+        <div class="col-4 pt-1">
+        </div>
+        <div class="col-4 text-center">
+            <a class="blog-header-logo text-dark" href="/">ZJNU Blog</a>
+        </div>
+        <div class="col-4 d-flex justify-content-end align-items-center">
+            {#         <a class="text-muted" href="#">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-3"><circle cx="10.5" cy="10.5" r="7.5"></circle><line x1="21" y1="21" x2="15.8" y2="15.8"></line></svg>
+            </a>#}
+
+        </div>
+    </div>
+</header>
+

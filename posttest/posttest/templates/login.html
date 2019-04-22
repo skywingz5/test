@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login</title>
+
+    {% include 'base.html' %}
+
+</head>
+<body>
+{% include 'header.html' %}
+
+<div class="container">
+    <h2>Login</h2>
+    <form method="post">
+
+
+        {{ login.csrf_token }}
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <ul>{{ login.mail }}</ul>
+            <ul>
+            {% for error in login.mail.errors %}
+                <li style="color:red;">{{ error }}</li>
+            {% endfor %}
+            </ul>
+
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <ul>{{ login.password }}</ul>
+            <ul>
+            {% for error in login.password.errors %}
+                <li style="color:red;">{{ error }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+
+
+
+
+
+
+
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+            {{ error }}
+    </form>
+</div>
+</body>
+
+
+</html>

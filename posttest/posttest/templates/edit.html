@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'base.html' %}
+
+
+    <!--编辑框相关-->
+    <link rel="stylesheet" href="http://www.jq22.com/jquery/bootstrap-3.3.4.css">
+    <link href="{{ url_for('static', filename='dist/summernote.css') }}" rel="stylesheet"/>
+    {#    <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>#}
+    <script src="http://www.jq22.com/jquery/bootstrap-3.3.4.js"></script>
+    <script src="{{ url_for('static', filename = 'dist/summernote.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'dist/lang/summernote-zh-CN.js') }}"></script>
+
+
+    <script>
+        $(document).ready(function () {
+            $("#post_article").click(function () {
+                let data = {
+                    'title': $("#article_title").val(),
+                    'body': $('.summernote').summernote('code')
+                }
+                $.ajax({
+                    type: 'GET',
+                    url: '{{url_for("post_article")}}',
+                    data: data,
+                    dataType: 'json',//希望服务器返回json格式的数据
+                    success: function (data) {
+
+                        alert(JSON.stringify(data));
+
+
+                        {#                                                        window.location.href = "/";#}
+
+
+                    }
+                });
+            });
+        });
+    </script>
+
+    <title>Edit</title>
+
+    <script>
+
+        $(function () {
+            $('.summernote').summernote({
+                height: 400,
+                tabsize: 2,
+                lang: 'zh-CN'
+            });
+        });
+
+        {#        function test(){
+                    alert($('.summernote').summernote('code'));
+
+                }#}
+
+    </script>
+</head>
+<body>
+{% include 'header.html' %}
+
+<div class="container">
+
+    <input id="article_title" type="text" class="form-control"><br>
+
+
+    <div class="summernote">Hello Summernote</div>
+    <button type="button" id="post_article" class="btn btn-primary">POST ARTICLE</button>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'base.html' %}
+
+    <script>
+    $(document).ready(function(){
+           let data={
+               'info':'Hello'
+           }
+                                                $.ajax({
+                                                    type:'GET',
+                                                    url:'{{url_for("test_json")}}',
+                                                    data:data,
+                                                    dataType:'json',//希望服务器返回json格式的数据
+                                                    success:function(data){
+                                                        # $("#tjson").text(data.info)
+
+
+                                                        {#window.location.href = "/";#}
+                                                        {#window.location.reload()#}
+                                                    }
+                                                });
+    });
+    </script>
+
+</head>
+<body>
+    <h1 id="tjson">Hello World</h1>
+</body>
+</html>
