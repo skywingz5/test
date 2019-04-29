@@ -362,16 +362,6 @@ def home():
     return render_template('home.html', mail=session['mail'])
 
 
-@app.route('/test_json', methods=['POST', 'GET'])
-def test_json():
-
-    return json.dumps({'info': 'Hello Json'})
-
-
-@app.route('/testjson')
-def testjson():
-    return render_template('testjson.html')
-
 
 @app.route('/post_article', methods=['POST', 'GET'])
 def post_article():
@@ -394,10 +384,6 @@ def auth():
 
     return jsonify({"result": "ojbk"})
 
-
-@app.route('/j')
-def j():
-    return render_template('j.html')
 
 
 if __name__ == '__main__':
