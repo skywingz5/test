@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+
+      <title>Index</title>
+      {% include 'base.html' %}
+
+  </head>
+
+  <body>
+
+    <div class="container">
+
+        {% include 'header.html' %}
+
+
+      <div class="nav-scroller py-1 mb-2">
+        <nav class="nav d-flex justify-content-between">
+
+            {% for subject in subjects %}
+                <a class="p-2 text-muted" href="/articles/{{ subject.id }}">{{ subject.name }}</a>
+            {% endfor %}
+
+
+        </nav>
+      </div>
+
+      <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
+        <div class="col-md-6 px-0">
+          <h1 class="display-4 font-italic"><a href="/addposting" class="text-white font-weight-bold">Post Here</a></h1>
+          <p class="lead my-3">Make New Post Here</p>
+        </div>
+      </div>
+
+
+      </div>
+    </div>
+
+    <main role="main" class="container">
+
+        <div class="container">
+          <h3 class="pb-3 mb-4 font-italic border-bottom">
+            Popular Post
+          </h3>
+            {% for post in post %}
+
+          <div class="blog-post">
+
+              <h2 class="blog-post-title"><a href="/article/{{ post.id }}"> {{ post.title }}</a></h2>
+            <p class="blog-post-meta">{{ post.time.strftime("%Y-%m-%d %H:%M") }} by {{ post.author.mail }}</p>
+
+            <p>{{ post.body }}</p>
+          <p>Like {{ post.like}}</p>
+          <p>DisLike {{ post.dislike}}</p>
+
+
+          </div><!-- /.blog-post -->
+
+            {% endfor %}
+
+
+          <nav class="blog-pagination">
+            <a class="btn btn-outline-primary" href="#">Older</a>
+            <a class="btn btn-outline-secondary disabled" href="#">Newer</a>
+          </nav>
+
+        </div><!-- /.blog-main -->
+
+
+    </main><!-- /.container -->
+
+    <footer class="blog-footer">
+
+      <p>
+        <a href="/">Back to top</a>
+      </p>
+        <p>
+        <a href="/donation">donation</a>
+      </p>
+    </footer>
+
+
+
+
+
+  </body>
+</html>
