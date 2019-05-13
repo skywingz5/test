@@ -4,6 +4,7 @@ import socket
 from flask import Flask, render_template, request, jsonify, session, url_for, redirect, json
 from datetime import timedelta, datetime
 from flask_wtf import FlaskForm,RecaptchaField
+from flask_wtf.file import FileAllowed, FileRequired, FileField
 from wtforms import StringField, PasswordField
 from wtforms.validators import InputRequired, Email
 from werkzeug.utils import secure_filename
@@ -89,6 +90,7 @@ class LoginForm(FlaskForm):
     subject = StringField('subject', validators=[InputRequired('A subject is required!')])
     title = StringField('title', validators=[InputRequired('A title is required!')])
     body = StringField('body', validators=[InputRequired('A body is required!')])
+    file = FileField("File(pdf)", validators=[FileRequired(), FileAllowed(['pdf'])])
 
 class LoginForm2(FlaskForm):
     mail = StringField('mail', validators=[InputRequired(message='Email Required')])
