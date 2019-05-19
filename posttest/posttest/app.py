@@ -78,7 +78,8 @@ class Comment(db.Model):
     article_id = db.Column(db.Integer, db.ForeignKey('articles.id'))
     body = db.Column(db.Text)
     time = db.Column(db.DateTime)
-
+    like = db.Column(db.Integer)
+    dislike = db.Column(db.Integer)
 class IPs(db.Model):
     __tablename__ = 'ip'
     id = db.Column(db.Integer, primary_key=True)
@@ -140,6 +141,7 @@ def index():
     db.session.add(ips)
     db.session.commit()
 
+
     return render_template('index.html', mail=if_logined(), subjects=subjects,post=post)
 
 
@@ -162,7 +164,7 @@ def get_article(article_id):
 
 
 
-    return render_template('article.html', article=article, commentss=commentss)
+    return render_template('article.html', article=article, commentss=commentss, Tool=Tool)
 
 
 
@@ -313,11 +315,11 @@ def commenting():
     elif author == 'anton@qq.com':
         author = 1
     else:
-        author = 3
+       author = 3
 
 
 
-    comments = Comment(author_id=author, body=body,article_id=articleid, time=datetime.now())
+    comments = Comment(author_id=author, body=body,article_id=articleid, time=datetime.now(), like=0,dislike=0)
     db.session.add(comments)
     db.session.commit()
     return redirect(url_for('index'))
@@ -357,6 +359,21 @@ def delete_comment(comment_id):
     db.session.delete(comments)
     db.session.commit()
     return redirect(url_for('index'))
+
+#-------------------------------------------------------------------------email filter
+class Tool:
+
+    @staticmethod
+    def email_display_filter(email):
+        pre = email[:email.rfind('@')]
+        display = pre[:len(pre) // 2]
+        suf = email[email.rfind('@') + 1:]
+
+        for i in range(len(pre[len(pre) // 2:])):
+            display += '*'
+
+        return display + suf
+
 
 #-----------------------------------------------------------------------------------------------------
 @app.route('/home')
