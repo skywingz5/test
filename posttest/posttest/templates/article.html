@@ -31,7 +31,7 @@
     {% for commentss in article.comments %}
 
         <div class="card bg-secondary text-white">
-            <div class="card-body">{{ commentss.author.mail }} :<br>{{ commentss.body }}<br>{{ commentss.time.strftime("%Y-%m-%d %H:%M") }}
+            <div class="card-body">{{ Tool.email_display_filter(commentss.author.mail) }} :<br>{{ commentss.body }}<br>{{ commentss.time.strftime("%Y-%m-%d %H:%M") }}
             </div>
         </div><br>
     {% endfor %}
