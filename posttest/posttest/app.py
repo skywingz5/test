@@ -61,6 +61,7 @@ class Article(db.Model):
     time = db.Column(db.DateTime)
     like = db.Column(db.Integer)
     dislike = db.Column(db.Integer)
+    status = db.Column(db.Text)
 
 
 class Blogpost(db.Model):
@@ -134,7 +135,7 @@ def upload():
 def index():
 
     subjects = Subject.query.all()
-    post = Article.query.order_by(Article.time.desc()).all()
+    post = Article.query.filter(Article.status=='1').order_by(Article.time.desc())
     testss = socket.gethostbyname(socket.getfqdn())
     print(testss)
     ips = IPs(ip=testss, time=datetime.now())
@@ -333,6 +334,7 @@ def admin():
     comen = Comment.query.all()
     art = Article.query.all()
 
+
     mail = session.get('mail')
     if mail is None:
      return render_template('login.html')
@@ -359,6 +361,22 @@ def delete_comment(comment_id):
     db.session.delete(comments)
     db.session.commit()
     return redirect(url_for('index'))
+
+@app.route('/hide/article/<int:article_id>', methods=['POST', 'GET'])
+def hide_article(article_id):
+    article = Article.query.filter(Article.id == article_id).first()
+
+
+    if article.status == '1':
+        article.status = '2'
+        db.session.commit()
+
+    else :
+        article.status = '1'
+        db.session.commit()
+
+    return redirect(url_for('index'))
+
 
 #-------------------------------------------------------------------------email filter
 class Tool:
