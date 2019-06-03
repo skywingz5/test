@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Articles</title>
+    {% include 'base.html' %}
+
+</head>
+<body>
+{% include 'header.html' %}
+
+
+<div class="container">
+<table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author-mail</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for ss in ss %}
+            <tr>
+                <td><a href="/article/{{ ss.id }}">{{ ss.title }}</a></td>
+                <td>{{ ss.author.mail }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>
