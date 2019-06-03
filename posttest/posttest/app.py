@@ -131,11 +131,12 @@ def upload():
 
 #-----------------------------------------
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
 
     subjects = Subject.query.all()
     post = Article.query.filter(Article.status=='1').order_by(Article.time.desc())
+
     testss = socket.gethostbyname(socket.getfqdn())
     print(testss)
     ips = IPs(ip=testss, time=datetime.now())
@@ -146,6 +147,13 @@ def index():
     return render_template('index.html', mail=if_logined(), subjects=subjects,post=post)
 
 
+@app.route('/search')
+def search():
+    content = request.args['content']
+    ss = Article.query.filter(Article.title == content)
+    if content == '':
+        return 'Please input your searching content <a href="/">return</a>'
+    return render_template('search.html', ss=ss)
 
 
 @app.route('/articles/<subject_id>', methods=['GET', 'POST'])
@@ -156,6 +164,10 @@ def get_articles(subject_id):
     articles = pagination.items
     return render_template('articles.html', articles=articles, pagination=pagination, mail=if_logined(),
                            subject_id=subject_id)
+
+
+
+
 
 
 @app.route('/article/<article_id>')
@@ -378,6 +390,7 @@ def hide_article(article_id):
     return redirect(url_for('index'))
 
 
+
 #-------------------------------------------------------------------------email filter
 class Tool:
 
@@ -391,6 +404,9 @@ class Tool:
             display += '*'
 
         return display + suf
+
+
+
 
 
 #-----------------------------------------------------------------------------------------------------
