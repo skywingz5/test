@@ -37,6 +37,13 @@
     </div>
 
     <main role="main" class="container">
+    <div>
+        <form action="/search" class="form-inline">
+            <input name="content" class="form-control mr-sm-2" value="{{ request.args['content'] }}"
+                   type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
 
         <div class="container">
           <h3 class="pb-3 mb-4 font-italic border-bottom">
@@ -47,7 +54,7 @@
           <div class="blog-post">
 
               <h2 class="blog-post-title"><a href="/article/{{ post.id }}"> {{ post.title }}</a></h2>
-            <p class="blog-post-meta">{{ post.time }} by {{ post.author_id }}</p>
+            <p class="blog-post-meta">{{ post.time.strftime("%Y-%m-%d %H:%M") }} by {{ post.author.mail }}</p>
 
             <p>{{ post.body }}</p>
           <p>Like {{ post.like}}</p>
